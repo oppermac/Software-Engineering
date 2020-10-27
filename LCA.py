@@ -2,6 +2,7 @@
 # I have made a few modifications to make it easier for me to understand.
 # Python is the second language and one with which I was unfamiliar until recently.
 # It is interesteing to see how this different imlepmentation flows compared to java.
+
 class LCA: 
 
 	def __init__(self, key): 
