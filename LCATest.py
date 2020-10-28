@@ -5,23 +5,29 @@ from LCA import treeToString
 
 
 class TestLCA(unittest.TestCase):
-    def test_lca_output(self):
-        root = Node(20)
-        root.left = Node(8)
-        root.right = Node(22)
-        root.left.left = Node(4)
-        root.left.right = Node(12)
-        root.left.right.left = Node(10)
-        root.left.right.right = Node(14)
+    def test__single_node_tree(self):
 
-        assert lca(root, 10, 14).data == 12
+        root = Node(1)
+        assert lca(root, 1, 6).data == 1
+       
+    def test_seven_node_tree(self):
+		root = Node(1)
+		root.left = Node(2)
+	    root.right = Node(3)
+		root.left.left = Node(4)
+		root.left.right = Node(5)
+		root.right.left = Node(6)
+	    root.right.right = Node(7)
+        
+        assert lca(root, 4, 5).data == 2
+        assert lca(root, 1, 2).data == 1
 
-    def test_lca_output_two(self):
+    def test_lca_output_teen_tree(self):
         root = Node(15)
-        root.left = Node(12)
-        root.left.left = Node(11)
+        root.left = Node(19)
+        root.left.left = Node(12)
         root.left.right = Node(13)
-        root.right = Node(18)
+        root.right = Node(14)
         root.right.left = Node(17)
 
         assert lca(root, 17, 13).data == 15
@@ -44,12 +50,6 @@ class TestLCA(unittest.TestCase):
        
         assert lca(None, 1, 3) is None
 
-    def test_LCA_single_node_tree(self):
-
-        root = Node(1)
-
-        assert lca(root, 1, 3).data == 1
-
     def test_arguments_not_in_tree(self):
 
         root = Node(2)
@@ -61,7 +61,7 @@ class TestLCA(unittest.TestCase):
     def test_empty_tree(self):
 
         root = None
-        assert lca(root, 3, 4) is None
+        assert lca(root, 8, 3) is None
 
     def test_tree_out_of_order(self):
         root = Node(50)
