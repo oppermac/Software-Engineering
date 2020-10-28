@@ -3,49 +3,52 @@
 # Python is the second language and one with which I was unfamiliar until recently.
 # It is interesteing to see how this different imlepmentation flows compared to java.
 
-class LCA: 
-
-	def __init__(self, key): 
-		self.key = key 
-		self.left = None
-		self.right = None
 
 
-def findPath( root, path, k): 
+class Node:
 
 
-	if root is None: 
-		return False
-
-	path.append(root.key) 
-
-
-	if root.key == k : 
-		return True
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
 
 
-	if ((root.left != None and findPath(root.left, path, k)) or
-			(root.right!= None and findPath(root.right, path, k))): 
-		return True
 
-	
-	path.pop() 
-	return False
+def lca(root, n1, n2):
+
+    if root is None:
+        return None
+
+    
+    if root.data > n1 and root.data > n2:
+        return lca(root.left, n1, n2)
+
+       
+    if root.data < n1 and root.data < n2:
+        return lca(root.right, n1, n2)
+
+    return root
 
 
-def findLCA(root, n1, n2): 
+def treeToString(root: Node, string: list):
+ 
+    if root is None:
+        return
 
-	path1 = [] 
-	path2 = [] 
+
+    string.append(str(root.data))
 
 
-	if (not findPath(root, path1, n1) or not findPath(root, path2, n2)): 
-		return -1
+    if not root.left and not root.right:
+        return
 
-	
-	i = 0
-	while(i < len(path1) and i < len(path2)): 
-		if path1[i] != path2[i]: 
-			break
-		i += 1
-	return path1[i-1] 
+
+    string.append('(')
+    treeToString(root.left, string)
+    string.append(')')
+
+    if root.right:
+        string.append('(')
+        treeToString(root.right, string)
+        string.append(')')
